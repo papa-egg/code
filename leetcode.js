@@ -8,39 +8,39 @@
  * @return { Number }
  */
 function getMaxEqualDiffLength(args) {
-	const numArgs = Array.from(new Set(args.sort((a, b) => a - b)));
-	const maxDiff = numArgs[numArgs.length - 1] - numArgs[0];
-	const rel = [];
-	let maxLength = 0;
+    const numArgs = Array.from(new Set(args.sort((a, b) => a - b)));
+    const maxDiff = numArgs[numArgs.length - 1] - numArgs[0];
+    const rel = [];
+    let maxLength = 0;
 
-	function getMaxDiffStr(curStr, curNum, diff) {
-		let addNum = curNum + diff;
+    function getMaxDiffStr(curStr, curNum, diff) {
+        let addNum = curNum + diff;
 
-		if (numArgs.indexOf(addNum) > -1) {
-			curStr += '|' + addNum;
-			curNum = curNum + diff;
+        if (numArgs.indexOf(addNum) > -1) {
+            curStr += '|' + addNum;
+            curNum = curNum + diff;
 
-			getMaxDiffStr(curStr, curNum, diff);
-		} else {
-			let curStrLength = curStr.split('|').length;
+            getMaxDiffStr(curStr, curNum, diff);
+        } else {
+            let curStrLength = curStr.split('|').length;
 
-			maxLength = curStrLength > maxLength ? curStrLength : maxLength;
-			if (curStr.split('|').length > 1) rel.push(curStr);
-		}
-	}
+            maxLength = curStrLength > maxLength ? curStrLength : maxLength;
+            if (curStr.split('|').length > 1) rel.push(curStr);
+        }
+    }
 
-	for (let i = 1; i <= maxDiff; i++) {
-		for (let j = 0; j < numArgs.length; j++) {
-			let curStr = '' + numArgs[j];
-			let curNum = parseInt(numArgs[j]);
+    for (let i = 1; i <= maxDiff; i++) {
+        for (let j = 0; j < numArgs.length; j++) {
+            let curStr = '' + numArgs[j];
+            let curNum = parseInt(numArgs[j]);
 
-			getMaxDiffStr(curStr, curNum, i);
-		}
-	}
+            getMaxDiffStr(curStr, curNum, i);
+        }
+    }
 
-	rel.sort((a, b) => b.split('|').length - a.split('|'));
+    rel.sort((a, b) => b.split('|').length - a.split('|'));
 
-	return maxLength;
+    return maxLength;
 }
 
 /**
@@ -57,45 +57,45 @@ function getMaxEqualDiffLength(args) {
  * @return { Array }
  */
 function threeSum(nums) {
-	const rel = [];
+    const rel = [];
 
-	for (let i = 0; i < nums.length; i++) {
+    for (let i = 0; i < nums.length; i++) {
 
-		for (let j = i + 1; j < nums.length; j++) {
+        for (let j = i + 1; j < nums.length; j++) {
 
-			nums.forEach((item, index) => {
-				if (index == i || index == j) return;
+            nums.forEach((item, index) => {
+                if (index == i || index == j) return;
 
-				if (nums[i] + nums[j] + item == 0) {
-					const unite = rel.every((relItem) => {
+                if (nums[i] + nums[j] + item == 0) {
+                    const unite = rel.every((relItem) => {
 
-						if ((relItem.indexOf(nums[i]) > -1 &&
-							relItem.indexOf(nums[j]) > -1 &&
-							relItem.indexOf(item) > -1)
-						) {
-							const newArr = Object.assign([], relItem);
+                        if ((relItem.indexOf(nums[i]) > -1 &&
+                            relItem.indexOf(nums[j]) > -1 &&
+                            relItem.indexOf(item) > -1)
+                        ) {
+                            const newArr = Object.assign([], relItem);
 
-							if (nums[i] == 0 && nums[j] == 0 && item == 0) {
-								if (relItem[0] || relItem[1] || relItem[2]) {
-									return true;
-								}
-							}
+                            if (nums[i] == 0 && nums[j] == 0 && item == 0) {
+                                if (relItem[0] || relItem[1] || relItem[2]) {
+                                    return true;
+                                }
+                            }
 
-							return false;
-						}
+                            return false;
+                        }
 
-						return true;
-					});
+                        return true;
+                    });
 
-					if (unite) {
-						rel.push([nums[i], nums[j], item]);
-					}
-				}
-			})
-		}
-	}
+                    if (unite) {
+                        rel.push([nums[i], nums[j], item]);
+                    }
+                }
+            })
+        }
+    }
 
-	return rel;
+    return rel;
 }
 
 /**
@@ -107,26 +107,26 @@ function threeSum(nums) {
  * @return { Number }
  */
 function getSqrtNum(n) {
-	const rel = [1];
-	let cIndex = 2;
+    const rel = [1];
+    let cIndex = 2;
 
-	function isNotCompleteSqrt(num) {
-		const sqrtNum = Math.sqrt(num);
+    function isNotCompleteSqrt(num) {
+        const sqrtNum = Math.sqrt(num);
 
-		return !(sqrtNum == parseInt(sqrtNum));
-	}
+        return !(sqrtNum == parseInt(sqrtNum));
+    }
 
-	function increaseCal(cIndex) {
-		if (rel.length == n) return;
+    function increaseCal(cIndex) {
+        if (rel.length == n) return;
 
-		if (isNotCompleteSqrt(cIndex)) rel.push(cIndex);
+        if (isNotCompleteSqrt(cIndex)) rel.push(cIndex);
 
-		increaseCal(++cIndex);
-	}
+        increaseCal(++cIndex);
+    }
 
-	increaseCal(cIndex);
+    increaseCal(cIndex);
 
-	return rel.pop();
+    return rel.pop();
 }
 
 /**
@@ -139,28 +139,28 @@ function getSqrtNum(n) {
  * @return { Array }
  */
 function getOutQuareNum() {
-	const rel = [];
+    const rel = [];
 
-	function isOutQuareNum(n) {
-		const initSet = [...new Set(String(n).split(''))];
-		const sqrSet = [...new Set(String(n * n).split(''))];
-		const finSet = [...new Set([...initSet, ...sqrSet])];
+    function isOutQuareNum(n) {
+        const initSet = [...new Set(String(n).split(''))];
+        const sqrSet = [...new Set(String(n * n).split(''))];
+        const finSet = [...new Set([...initSet, ...sqrSet])];
 
-		if (initSet.length == String(n).length &&
-			finSet.length == initSet.length + sqrSet.length) {
-			return true;
-		}
+        if (initSet.length == String(n).length &&
+            finSet.length == initSet.length + sqrSet.length) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	for (let i = 100000; i <= 999999; i++) {
-		if (isOutQuareNum(i)) {
-			rel.push(i);
-		}
-	}
+    for (let i = 100000; i <= 999999; i++) {
+        if (isOutQuareNum(i)) {
+            rel.push(i);
+        }
+    }
 
-	return rel;
+    return rel;
 }
 
 /**
@@ -173,34 +173,34 @@ function getOutQuareNum() {
  * @return { Number }
  */
 function calRabbitNum(n = 0) {
-	if (typeof +n != 'number' || n <= 0) {
-		throw new Error('n is not the integer');
-	}
-	let fertList = [{ m: 3, s: false }];
-	let finNum = 1;
-	let addNum = 0;
+    if (typeof +n != 'number' || n <= 0) {
+        throw new Error('n is not the integer');
+    }
+    let fertList = [{ m: 3, s: false }];
+    let finNum = 1;
+    let addNum = 0;
 
-	for (let i = 1; i <= n; i++) {
-		for (let fm of fertList) {
-			if (fm.m <= i && (!fm.s)) {
-				fm.s = true;
-				addNum++;
-			}
-		}
+    for (let i = 1; i <= n; i++) {
+        for (let fm of fertList) {
+            if (fm.m <= i && (!fm.s)) {
+                fm.s = true;
+                addNum++;
+            }
+        }
 
-		if (addNum > 0) {
-			for (let j = 0; j < addNum; j++) {
-				fertList.push({
-					m: i + 2,
-					s: false,
-				});
-			}
-		}
+        if (addNum > 0) {
+            for (let j = 0; j < addNum; j++) {
+                fertList.push({
+                    m: i + 2,
+                    s: false,
+                });
+            }
+        }
 
-		finNum += addNum;
-	}
+        finNum += addNum;
+    }
 
-	return finNum;
+    return finNum;
 }
 
 /**
@@ -211,37 +211,37 @@ function calRabbitNum(n = 0) {
  * @return { Number }
  */
 function lengthOfLongestSubstring(s) {
-	const sr = s.split('');
-	let rel = '';
-	let l = 0;
+    const sr = s.split('');
+    let rel = '';
+    let l = 0;
 
-	function calLongStr(sr) {
-		let _s = '';
+    function calLongStr(sr) {
+        let _s = '';
 
-		for (let [index, item] of sr.entries()) {
-			if (_s.indexOf(item) == -1) {
-				_s += item;
-			} else {
-				if (_s.length > l) {
-					rel = _s;
-					l = _s.length;
-				}
+        for (let [index, item] of sr.entries()) {
+            if (_s.indexOf(item) == -1) {
+                _s += item;
+            } else {
+                if (_s.length > l) {
+                    rel = _s;
+                    l = _s.length;
+                }
 
-				if (sr.slice(index).length > l) {
-					calLongStr(sr.slice(index));
-				}
+                if (sr.slice(index).length > l) {
+                    calLongStr(sr.slice(index));
+                }
 
-				break;
-			}
+                break;
+            }
 
-			rel = _s;
-			l = _s.length;
-		}
-	}
+            rel = _s;
+            l = _s.length;
+        }
+    }
 
-	calLongStr(sr);
+    calLongStr(sr);
 
-	return l;
+    return l;
 }
 
 /**
@@ -255,43 +255,43 @@ function lengthOfLongestSubstring(s) {
  * @return { Array }
  */
 function combinationSum3(k, n) {
-	const sr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-	const rel = [];
+    const sr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const rel = [];
 
-	function getCNum(ss) {
-		let _s = 0;
+    function getCNum(ss) {
+        let _s = 0;
 
-		for (let item of ss) {
-			_s += parseInt(item);
-		}
+        for (let item of ss) {
+            _s += parseInt(item);
+        }
 
-		return _s;
-	}
+        return _s;
+    }
 
-	function cycleCumulative(ci = 0, ss = '') {
-		for (let i = ci; i < sr.length; i++) {
-			const _cs = getCNum(ss);
-			const _cd = ss + sr[i];
+    function cycleCumulative(ci = 0, ss = '') {
+        for (let i = ci; i < sr.length; i++) {
+            const _cs = getCNum(ss);
+            const _cd = ss + sr[i];
 
-			if (_cd.length == k) {
-				if (_cs + sr[i] == n) {
-					const ra = [];
+            if (_cd.length == k) {
+                if (_cs + sr[i] == n) {
+                    const ra = [];
 
-					[..._cd].forEach((item) => {
-						ra.push(parseInt(item));
-					});
+                    [..._cd].forEach((item) => {
+                        ra.push(parseInt(item));
+                    });
 
-					rel.push(ra);
-				}
-			} else {
-				cycleCumulative(sr[i], _cd);
-			}
-		}
-	}
+                    rel.push(ra);
+                }
+            } else {
+                cycleCumulative(sr[i], _cd);
+            }
+        }
+    }
 
-	cycleCumulative();
+    cycleCumulative();
 
-	return rel;
+    return rel;
 }
 
 /**
@@ -306,82 +306,82 @@ function combinationSum3(k, n) {
  * @return { Boolean }
  */
 function isAdditiveNumber(num) {
-	let nr = num.split('');
-	let rr = [];
-	let rq = [];
-	let rel = [];
+    let nr = num.split('');
+    let rr = [];
+    let rq = [];
+    let rel = [];
 
-	for (let i = 2; i <= nr.length - 1; i++) {
-		putLocal(1, '', i);
-	}
+    for (let i = 2; i <= nr.length - 1; i++) {
+        putLocal(1, '', i);
+    }
 
-	function putLocal(s, sr = '', n = 1) {
-		for (let i = s; i <= nr.length - 1; i++) {
-			let sAr = !sr ? [] : sr.split(',');
+    function putLocal(s, sr = '', n = 1) {
+        for (let i = s; i <= nr.length - 1; i++) {
+            let sAr = !sr ? [] : sr.split(',');
 
-			if (sAr.indexOf(String(i)) == -1) {
-				sAr.push(String(i));
+            if (sAr.indexOf(String(i)) == -1) {
+                sAr.push(String(i));
 
-				if (sAr.length == n && sAr.length > 1) {
-					rr.push(sAr.join(','));
-				} else {
-					putLocal(i + 1, sAr.join(','), n);
-				}
-			}
-		}
-	}
+                if (sAr.length == n && sAr.length > 1) {
+                    rr.push(sAr.join(','));
+                } else {
+                    putLocal(i + 1, sAr.join(','), n);
+                }
+            }
+        }
+    }
 
-	function toInt(num) {
-		return +num;
-	}
+    function toInt(num) {
+        return +num;
+    }
 
-	for (let i = 0; i < rr.length; i++) {
-		const _cr = [];
-		const _nr = Object.assign([], nr);
-		const _ra = rr[i].split(',');
+    for (let i = 0; i < rr.length; i++) {
+        const _cr = [];
+        const _nr = Object.assign([], nr);
+        const _ra = rr[i].split(',');
 
-		for (let j = 0; j < _ra.length; j++) {
-			if (j == 0) {
-				_cr.push((_nr.splice(0, (_ra[j]))).join(''));
-			} else {
-				_cr.push((_nr.splice(0, (_ra[j]) - _ra[j - 1])).join(''));
-			}
-		}
+        for (let j = 0; j < _ra.length; j++) {
+            if (j == 0) {
+                _cr.push((_nr.splice(0, (_ra[j]))).join(''));
+            } else {
+                _cr.push((_nr.splice(0, (_ra[j]) - _ra[j - 1])).join(''));
+            }
+        }
 
-		_cr.push(_nr.join(''));
-		rq.push(_cr);
-	}
+        _cr.push(_nr.join(''));
+        rq.push(_cr);
+    }
 
-	for (let i = 0; i < rq.length; i++) {
-		const cArr = rq[i];
+    for (let i = 0; i < rq.length; i++) {
+        const cArr = rq[i];
 
-		if (cArr.length >= 3) {
-			let isPass = true;
+        if (cArr.length >= 3) {
+            let isPass = true;
 
-			for (let j = 0; j < cArr.length; j++) {
-				if (j + 3 <= cArr.length) {
+            for (let j = 0; j < cArr.length; j++) {
+                if (j + 3 <= cArr.length) {
 
-					// filtering pre - 0
-					if (!(String(parseInt(cArr[j])) == cArr[j]
-						&& String(parseInt(cArr[j + 1])) == cArr[j + 1]
-						&& String(parseInt(cArr[j + 2])) == cArr[j + 2])
-					){
-						isPass = false;
-					}
+                    // filtering pre - 0
+                    if (!(String(parseInt(cArr[j])) == cArr[j]
+                        && String(parseInt(cArr[j + 1])) == cArr[j + 1]
+                        && String(parseInt(cArr[j + 2])) == cArr[j + 2])
+                    ){
+                        isPass = false;
+                    }
 
-					if (toInt(cArr[j]) + toInt(cArr[j + 1]) != toInt(cArr[j + 2])) {
-						isPass = false;
-					}
-				}
-			}
+                    if (toInt(cArr[j]) + toInt(cArr[j + 1]) != toInt(cArr[j + 2])) {
+                        isPass = false;
+                    }
+                }
+            }
 
-			if (isPass) {
-				rel.push(cArr);
-			}
-		}
-	}
+            if (isPass) {
+                rel.push(cArr);
+            }
+        }
+    }
 
-	return rel.length > 0;
+    return rel.length > 0;
 }
 
 /**
@@ -397,27 +397,27 @@ function isAdditiveNumber(num) {
  * @return { Number }
  */
 function minPathSum(grid) {
-	const rel = [];
+    const rel = [];
 
-	function snakeWalk(x, y, s) {
-		if (grid[x + 1]) {
-			snakeWalk(x + 1, y, s + grid[x + 1][y]);
-		}
+    function snakeWalk(x, y, s) {
+        if (grid[x + 1]) {
+            snakeWalk(x + 1, y, s + grid[x + 1][y]);
+        }
 
-		if (grid[x][y + 1]) {
-			snakeWalk(x, y + 1, s + grid[x][y + 1])
-		}
+        if (grid[x][y + 1]) {
+            snakeWalk(x, y + 1, s + grid[x][y + 1])
+        }
 
-		if ((!grid[x + 1]) && (!grid[x][y + 1])) {
-			rel.push(s);
-		}
+        if ((!grid[x + 1]) && (!grid[x][y + 1])) {
+            rel.push(s);
+        }
 
-	}
+    }
 
-	snakeWalk(0, 0, grid[0][0]);
-	rel.sort((a, b) => a - b);
+    snakeWalk(0, 0, grid[0][0]);
+    rel.sort((a, b) => a - b);
 
-	return rel[0];
+    return rel[0];
 }
 
 /**
@@ -435,34 +435,34 @@ function minPathSum(grid) {
  * @return { Number }
  */
 function findLength(A, B) {
-	const rel = [];
-	let mx = 0;
+    const rel = [];
+    let mx = 0;
 
-	function setSameArr(num) {
-		for (let [index, item] of A.entries()) {
-			const sr = A.slice(index, index + num);
+    function setSameArr(num) {
+        for (let [index, item] of A.entries()) {
+            const sr = A.slice(index, index + num);
 
-			if (sr.length == num) {
-				rel.push(sr);
-			}
-		}
-	}
+            if (sr.length == num) {
+                rel.push(sr);
+            }
+        }
+    }
 
-	for (let i = 1; i <= A.length; i++) {
-		setSameArr(i);
-	}
+    for (let i = 1; i <= A.length; i++) {
+        setSameArr(i);
+    }
 
-	for (let item of rel) {
-		const sr = '|' + item.join('|') + '|';
-		const sa = '|' + A.join('|') + '|';
-		const sb = '|' + B.join('|') + '|';
+    for (let item of rel) {
+        const sr = '|' + item.join('|') + '|';
+        const sa = '|' + A.join('|') + '|';
+        const sb = '|' + B.join('|') + '|';
 
-		if (sa.indexOf(sr) > -1 && sb.indexOf(sr) > -1 && item.length > mx) {
-			mx = item.length;
-		}
-	}
+        if (sa.indexOf(sr) > -1 && sb.indexOf(sr) > -1 && item.length > mx) {
+            mx = item.length;
+        }
+    }
 
-	return mx;
+    return mx;
 }
 
 /**
@@ -474,49 +474,49 @@ function findLength(A, B) {
  * @return { Number }
  */
 function trap(nums) {
-	let nArr = [];
-	let caps = [];
-	let s = 0;
+    let nArr = [];
+    let caps = [];
+    let s = 0;
 
-	function calHandler(i = 0) {
-		if (typeof nums[i] != 'number') return;
+    function calHandler(i = 0) {
+        if (typeof nums[i] != 'number') return;
 
-		if (caps.length <= 0) {
-			const _smax = Math.max(...nums.slice(i + 1));
+        if (caps.length <= 0) {
+            const _smax = Math.max(...nums.slice(i + 1));
 
-			if (nums[i] >= _smax) {
-				const _next = nums.indexOf(_smax, i + 1);
+            if (nums[i] >= _smax) {
+                const _next = nums.indexOf(_smax, i + 1);
 
-				nArr.push([i, _next]);
-				caps = [];
-				calHandler(_next);
-			} else {
-				caps.push(i);
-				calHandler(++i);
-			}
-		} else {
-			if (nums[i] < nums[caps[0]]) {
-				calHandler(++i);
-			} else {
-				nArr.push([caps[0], i]);
-				caps = [];
-				calHandler(i);
-			}
-		}
-	}
+                nArr.push([i, _next]);
+                caps = [];
+                calHandler(_next);
+            } else {
+                caps.push(i);
+                calHandler(++i);
+            }
+        } else {
+            if (nums[i] < nums[caps[0]]) {
+                calHandler(++i);
+            } else {
+                nArr.push([caps[0], i]);
+                caps = [];
+                calHandler(i);
+            }
+        }
+    }
 
-	calHandler();
+    calHandler();
 
-	for (let item of nArr) {
-		const _crr = item;
-		const _cmax = Math.min(nums[_crr[0]], nums[_crr[[1]]]);
+    for (let item of nArr) {
+        const _crr = item;
+        const _cmax = Math.min(nums[_crr[0]], nums[_crr[[1]]]);
 
-		for (let i = _crr[0] + 1; i < _crr[1]; i++) {
-			s += _cmax - nums[i];
-		}
-	}
+        for (let i = _crr[0] + 1; i < _crr[1]; i++) {
+            s += _cmax - nums[i];
+        }
+    }
 
-	return s;
+    return s;
 }
 
 /**
@@ -530,40 +530,40 @@ function trap(nums) {
  * @return { String }
  */
 function shortestPalindrome(s) {
-	if (s.length <= 1) return s;
-	const sArr = s.split('').join(' ').split('');
-	const rel = [];
+    if (s.length <= 1) return s;
+    const sArr = s.split('').join(' ').split('');
+    const rel = [];
 
-	function generateShortes(cr) {
-		const mArr = (sArr.length - 1 - cr > cr) ? sArr.slice(cr + 1) : sArr.slice(0, cr).reverse();
-		const xArr = (sArr.length - 1 - cr > cr) ? sArr.slice(0, cr).reverse() : sArr.slice(cr + 1);
-		let isShort = true;
+    function generateShortes(cr) {
+        const mArr = (sArr.length - 1 - cr > cr) ? sArr.slice(cr + 1) : sArr.slice(0, cr).reverse();
+        const xArr = (sArr.length - 1 - cr > cr) ? sArr.slice(0, cr).reverse() : sArr.slice(cr + 1);
+        let isShort = true;
 
-		for (let [index, item] of mArr.entries()) {
-			const _cx = item;
-			const _cy = xArr[index] || item;
+        for (let [index, item] of mArr.entries()) {
+            const _cx = item;
+            const _cy = xArr[index] || item;
 
-			if (_cx == _cy) {
-				xArr[index] = item;
-			} else {
-				isShort = false;
+            if (_cx == _cy) {
+                xArr[index] = item;
+            } else {
+                isShort = false;
 
-				break;
-			}
-		}
+                break;
+            }
+        }
 
-		if (isShort) {
-			rel.push([...xArr.reverse(), sArr[cr], ...mArr].join('').split(' ').join(''));
-		}
-	}
+        if (isShort) {
+            rel.push([...xArr.reverse(), sArr[cr], ...mArr].join('').split(' ').join(''));
+        }
+    }
 
-	for (let [index, item] of sArr.entries()) {
-		generateShortes(index);
-	}
+    for (let [index, item] of sArr.entries()) {
+        generateShortes(index);
+    }
 
-	rel.sort((a, b) => a.length - b.length);
+    rel.sort((a, b) => a.length - b.length);
 
-	return rel[0];
+    return rel[0];
 }
 
 /**
@@ -577,118 +577,118 @@ function shortestPalindrome(s) {
  * @return { String }
  */
 function nearestPalindromic(n) {
-	const nArr = n.split('');
-	const prr = n.split('');
-	const sArr = [];
-	let rel = [];
+    const nArr = n.split('');
+    const prr = n.split('');
+    const sArr = [];
+    let rel = [];
 
-	if (prr.length % 2) {
-		prr[(prr.length - 1)/2] = parseInt(prr[(prr.length - 1)/2]) + 1;
-		rel.push(prr.join(''));
-	}
+    if (prr.length % 2) {
+        prr[(prr.length - 1)/2] = parseInt(prr[(prr.length - 1)/2]) + 1;
+        rel.push(prr.join(''));
+    }
 
-	if (!(nArr.length % 2)) nArr.splice((nArr.length) / 2, 0, '');
+    if (!(nArr.length % 2)) nArr.splice((nArr.length) / 2, 0, '');
 
-	let cl = nArr.slice(0, (nArr.length - 1) / 2);
-	let cr = nArr.slice((nArr.length - 1) / 2 + 1).reverse();
+    let cl = nArr.slice(0, (nArr.length - 1) / 2);
+    let cr = nArr.slice((nArr.length - 1) / 2 + 1).reverse();
 
-	if (cl.join('') == cr.join('')) {
-		const _ccl = cl.reverse();
-		const _ccr = cr.reverse();
-		const _cc = nArr[(nArr.length - 1) / 2];
-		const _cl = Object.assign([], cl);
-		const _we = [nArr[(nArr.length - 1) / 2], ..._ccl];
+    if (cl.join('') == cr.join('')) {
+        const _ccl = cl.reverse();
+        const _ccr = cr.reverse();
+        const _cc = nArr[(nArr.length - 1) / 2];
+        const _cl = Object.assign([], cl);
+        const _we = [nArr[(nArr.length - 1) / 2], ..._ccl];
 
-		for (let i = 0; i < _we.length; i++) {
-			if (i == _we.length - 1) {
-				if (_we[i] > 1) {
-					_ccl[i - 1] = _we[i] - 1;
-					_ccr[i - 1] = _we[i] - 1;
-				} else {
-					let _str = '';
-					for (let j = 0; j < n.length - 1; j++) {
-						_str += '9';
-					}
+        for (let i = 0; i < _we.length; i++) {
+            if (i == _we.length - 1) {
+                if (_we[i] > 1) {
+                    _ccl[i - 1] = _we[i] - 1;
+                    _ccr[i - 1] = _we[i] - 1;
+                } else {
+                    let _str = '';
+                    for (let j = 0; j < n.length - 1; j++) {
+                        _str += '9';
+                    }
 
-					rel.push(_str);
-				}
-			}
+                    rel.push(_str);
+                }
+            }
 
-			if (_we[i] > 0 && (i < _we.length - 1)) {
-				if (i == 0) {
-					nArr[(nArr.length - 1) / 2] = _we[i] - 1;
-				} else {
-					_ccl[i - 1] = _we[i] - 1;
-					_ccr[i - 1] = _we[i] - 1;
-				}
+            if (_we[i] > 0 && (i < _we.length - 1)) {
+                if (i == 0) {
+                    nArr[(nArr.length - 1) / 2] = _we[i] - 1;
+                } else {
+                    _ccl[i - 1] = _we[i] - 1;
+                    _ccr[i - 1] = _we[i] - 1;
+                }
 
-				break;
-			}
-		}
+                break;
+            }
+        }
 
-		cl = _ccl.reverse();
-		cr = _ccr.reverse();
-	}
+        cl = _ccl.reverse();
+        cr = _ccr.reverse();
+    }
 
-	let wq = '';
-	let wqr = [];
+    let wq = '';
+    let wqr = [];
 
-	for (let i = 0; i < n.length - 1; i++) {
-		wq += '9';
-	}
-	rel.push(wq);
+    for (let i = 0; i < n.length - 1; i++) {
+        wq += '9';
+    }
+    rel.push(wq);
 
-	for (let i = 0; i < n.length + 1; i++) {
-		wqr.push('0');
-	}
+    for (let i = 0; i < n.length + 1; i++) {
+        wqr.push('0');
+    }
 
-	wqr[0] = '1';
-	wqr[wqr.length - 1] = '1';
-	rel.push(wqr.join(''));
+    wqr[0] = '1';
+    wqr[wqr.length - 1] = '1';
+    rel.push(wqr.join(''));
 
-	for (let [index, item] of cl.entries()) {
-		sArr.push([item, cr[index]]);
-	}
+    for (let [index, item] of cl.entries()) {
+        sArr.push([item, cr[index]]);
+    }
 
-	function joinBreak(ci, s = '') {
-		if (ci == sArr.length - 1) {
-			for (let [index, item] of sArr[ci].entries()) {
-				const _st = s + item;
-				const sdd = _st + nArr[(nArr.length - 1) / 2] + _st.split('').reverse().join('');
+    function joinBreak(ci, s = '') {
+        if (ci == sArr.length - 1) {
+            for (let [index, item] of sArr[ci].entries()) {
+                const _st = s + item;
+                const sdd = _st + nArr[(nArr.length - 1) / 2] + _st.split('').reverse().join('');
 
-				if (sdd != n) {
-					rel.push(_st + nArr[(nArr.length - 1) / 2] + _st.split('').reverse().join(''));
-				}
-			}
+                if (sdd != n) {
+                    rel.push(_st + nArr[(nArr.length - 1) / 2] + _st.split('').reverse().join(''));
+                }
+            }
 
-			return;
-		}
+            return;
+        }
 
-		for (let [index, item] of sArr[ci].entries()) {
-			joinBreak(ci + 1, s + item);
-		}
-	}
+        for (let [index, item] of sArr[ci].entries()) {
+            joinBreak(ci + 1, s + item);
+        }
+    }
 
-	joinBreak(0);
+    joinBreak(0);
 
-	let arr = [];
-	let rrr = [];
+    let arr = [];
+    let rrr = [];
 
-	for (let i = 0; i < rel.length; i++) {
-		arr.push(Math.abs(parseInt(rel[i]) - parseInt(n)));
-	}
+    for (let i = 0; i < rel.length; i++) {
+        arr.push(Math.abs(parseInt(rel[i]) - parseInt(n)));
+    }
 
-	const min = Math.min(...arr);
+    const min = Math.min(...arr);
 
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i] == min) {
-			rrr.push(rel[i]);
-		}
-	}
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == min) {
+            rrr.push(rel[i]);
+        }
+    }
 
-	rrr.sort((a, b) => a - b);
+    rrr.sort((a, b) => a - b);
 
-	return rrr[0];
+    return rrr[0];
 }
 
 /**
@@ -713,31 +713,31 @@ function nearestPalindromic(n) {
  * @return { Array }
  */
 function medianSlidingWindow(nums, k) {
-	const nArr = Object.assign([], nums);
-	const sArr = [];
-	const rel = [];
+    const nArr = Object.assign([], nums);
+    const sArr = [];
+    const rel = [];
 
-	for (let [index, item] of nArr.entries()) {
-		if (index + k <= nArr.length) {
-			sArr.push(nArr.slice(index, index + k));
-		}
-	}
+    for (let [index, item] of nArr.entries()) {
+        if (index + k <= nArr.length) {
+            sArr.push(nArr.slice(index, index + k));
+        }
+    }
 
-	for (let [index, item] of sArr.entries()) {
-		rel.push(getMedianNum(item));
-	}
+    for (let [index, item] of sArr.entries()) {
+        rel.push(getMedianNum(item));
+    }
 
-	function getMedianNum(arg) {
-		arg.sort((a, b) => a - b);
+    function getMedianNum(arg) {
+        arg.sort((a, b) => a - b);
 
-		if (arg.length % 2 == 0) {
-			return parseFloat((arg[arg.length / 2] + arg[arg.length / 2 - 1]) / 2);
-		} else {
-			return arg[parseInt(arg.length / 2)];
-		}
-	}
+        if (arg.length % 2 == 0) {
+            return parseFloat((arg[arg.length / 2] + arg[arg.length / 2 - 1]) / 2);
+        } else {
+            return arg[parseInt(arg.length / 2)];
+        }
+    }
 
-	return rel;
+    return rel;
 }
 
 /**
@@ -750,27 +750,27 @@ function medianSlidingWindow(nums, k) {
  * @return { String }
  */
 function simplifyPath(path) {
-	path = path.replace(/(\/\.\/)/g, '/');
-	path = path.replace(/(\/\/)/g, '/');
+    path = path.replace(/(\/\.\/)/g, '/');
+    path = path.replace(/(\/\/)/g, '/');
 
-	const pArr = [];
-	const sArr= path.split('/');
-	let rel = '';
+    const pArr = [];
+    const sArr= path.split('/');
+    let rel = '';
 
-	for (let item of sArr) {
-		if (!item) continue;
-		if (item == '..') {
-			pArr.pop();
-		} else {
-			pArr.push(item);
-		}
-	}
+    for (let item of sArr) {
+        if (!item) continue;
+        if (item == '..') {
+            pArr.pop();
+        } else {
+            pArr.push(item);
+        }
+    }
 
-	for (let item of pArr) {
-		rel += '/' + item;
-	}
+    for (let item of pArr) {
+        rel += '/' + item;
+    }
 
-	return rel;
+    return rel;
 }
 
 /**
@@ -790,99 +790,99 @@ function simplifyPath(path) {
  * @return { Array }
  */
 function addOperators(num, target) {
-	const clr = ['+', '-', '*'];
-	const nArr = num.split('');
-	const sArr = [];
-	const cArr = [];
-	const rel = [];
+    const clr = ['+', '-', '*'];
+    const nArr = num.split('');
+    const sArr = [];
+    const cArr = [];
+    const rel = [];
 
-	function setSplitItem(k, n) {
-		let _spr = [];
+    function setSplitItem(k, n) {
+        let _spr = [];
 
-		function splitItem(sr = '', k, n) {
-			const _cArr = sr ? sr.split('|') : [];
+        function splitItem(sr = '', k, n) {
+            const _cArr = sr ? sr.split('|') : [];
 
-			if (_cArr.length == n) {
-				_cArr.sort((a, b) => a - b);
+            if (_cArr.length == n) {
+                _cArr.sort((a, b) => a - b);
 
-				if (_spr.indexOf(_cArr.join('|')) < 0) {
-					_spr.push(_cArr.join('|'));
-				}
+                if (_spr.indexOf(_cArr.join('|')) < 0) {
+                    _spr.push(_cArr.join('|'));
+                }
 
-				return;
-			}
+                return;
+            }
 
-			for (let i = 1; i <= k; i++) {
-				if (_cArr.indexOf(String(i)) < 0) {
-					let _cr = sr;
+            for (let i = 1; i <= k; i++) {
+                if (_cArr.indexOf(String(i)) < 0) {
+                    let _cr = sr;
 
-					if (_cArr.length > 0) {
-						_cr = _cr + '|' + i;
-					} else {
-						_cr += i;
-					}
+                    if (_cArr.length > 0) {
+                        _cr = _cr + '|' + i;
+                    } else {
+                        _cr += i;
+                    }
 
-					splitItem(_cr, k, n);
-				}
-			}
-		}
+                    splitItem(_cr, k, n);
+                }
+            }
+        }
 
-		splitItem('', k, n);
+        splitItem('', k, n);
 
-		for (let item of _spr) {
-			const cir = item.split('|');
-			let cs = '';
+        for (let item of _spr) {
+            const cir = item.split('|');
+            let cs = '';
 
-			for (let [index, cItem] of cir.entries()) {
-				if (index == 0) {
-					cs += num.slice(0, cItem);
-				} else {
-					cs += '|' + num.slice(cir[index - 1], cItem);
-				}
-			}
+            for (let [index, cItem] of cir.entries()) {
+                if (index == 0) {
+                    cs += num.slice(0, cItem);
+                } else {
+                    cs += '|' + num.slice(cir[index - 1], cItem);
+                }
+            }
 
-			cs += '|' + num.slice(cir[cir.length - 1]);
+            cs += '|' + num.slice(cir[cir.length - 1]);
 
-			sArr.push(cs.split('|'));
-		}
-	}
+            sArr.push(cs.split('|'));
+        }
+    }
 
-	function setCacular(ns, cx, sp = '') {
-		const _pr = ns.split('|');
-		sp += _pr[cx];
+    function setCacular(ns, cx, sp = '') {
+        const _pr = ns.split('|');
+        sp += _pr[cx];
 
-		if (cx == _pr.length - 1) {
-			cArr.push(sp);
+        if (cx == _pr.length - 1) {
+            cArr.push(sp);
 
-			return
-		}
+            return
+        }
 
-		for (let item of clr) {
-			setCacular(ns, cx + 1, sp + item);
-		}
-	}
+        for (let item of clr) {
+            setCacular(ns, cx + 1, sp + item);
+        }
+    }
 
-	function evil(fn) {
-		const Fn = Function;
+    function evil(fn) {
+        const Fn = Function;
 
-		return new Fn('return ' + fn)();
-	}
+        return new Fn('return ' + fn)();
+    }
 
-	for (let i = 2; i <= nArr.length; i++) {
-		setSplitItem(nArr.length - 1, i - 1);
-	}
+    for (let i = 2; i <= nArr.length; i++) {
+        setSplitItem(nArr.length - 1, i - 1);
+    }
 
-	for (let i = 0; i < sArr.length; i++) {
-		setCacular(sArr[i].join('|'), 0, '');
-	}
+    for (let i = 0; i < sArr.length; i++) {
+        setCacular(sArr[i].join('|'), 0, '');
+    }
 
-	for (let item of cArr) {
-		if (evil(item) == target) {
-			rel.push(item);
-		}
-	}
+    for (let item of cArr) {
+        if (evil(item) == target) {
+            rel.push(item);
+        }
+    }
 
-	return rel;
+    return rel;
 }
 
 
