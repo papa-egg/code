@@ -1,4 +1,4 @@
-![Async Logo](https://yunxi-material-library.oss-cn-hangzhou.aliyuncs.com/recordImg/786/EsSfKfAaMz.png)
+![Async Logo](https://yunxi-material-library.oss-cn-hangzhou.aliyuncs.com/recordImg/786/M4haWnYNQP.jpg)
 
 JavaScript算法题([ES6](http://es6.ruanyifeng.com/))，不定期更新。。。
 
