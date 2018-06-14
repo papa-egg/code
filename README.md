@@ -16,32 +16,36 @@ JavaScript算法题([ES6](http://es6.ruanyifeng.com/))，不定期更新。。�
 
 ```javascript
 // demo...
-let _spr = [];
+    const sr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const rel = [];
 
-    function splitItem(sr = '', k, n) {
-        const _cArr = sr ? sr.split('|') : [];
+    function getCNum(ss) {
+        let _s = 0;
 
-        if (_cArr.length == n) {
-            _cArr.sort((a, b) => a - b);
-
-            if (_spr.indexOf(_cArr.join('|')) < 0) {
-                _spr.push(_cArr.join('|'));
-            }
-
-            return;
+        for (let item of ss) {
+            _s += parseInt(item);
         }
 
-        for (let i = 1; i <= k; i++) {
-            if (_cArr.indexOf(String(i)) < 0) {
-                let _cr = sr;
+        return _s;
+    }
 
-                if (_cArr.length > 0) {
-                    _cr = _cr + '|' + i;
-                } else {
-                    _cr += i;
+    function cycleCumulative(ci = 0, ss = '') {
+        for (let i = ci; i < sr.length; i++) {
+            const _cs = getCNum(ss);
+            const _cd = ss + sr[i];
+
+            if (_cd.length == k) {
+                if (_cs + sr[i] == n) {
+                    const ra = [];
+
+                    [..._cd].forEach((item) => {
+                        ra.push(parseInt(item));
+                    });
+
+                    rel.push(ra);
                 }
-
-                splitItem(_cr, k, n);
+            } else {
+                cycleCumulative(sr[i], _cd);
             }
         }
     }
