@@ -67,7 +67,7 @@ function threeSum(nums) {
                 if (index == i || index == j) return;
 
                 if (nums[i] + nums[j] + item == 0) {
-                    
+
                     const unite = rel.every((relItem) => {
                         if ((relItem.indexOf(nums[i]) > -1 &&
                             relItem.indexOf(nums[j]) > -1 &&
