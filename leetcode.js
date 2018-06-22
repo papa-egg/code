@@ -62,12 +62,13 @@ function threeSum(nums) {
 
     for (let i = 0; i < nums.length; i++) {
         for (let j = i + 1; j < nums.length; j++) {
+
             nums.forEach((item, index) => {
                 if (index == i || index == j) return;
 
                 if (nums[i] + nums[j] + item == 0) {
+                    
                     const unite = rel.every((relItem) => {
-
                         if ((relItem.indexOf(nums[i]) > -1 &&
                             relItem.indexOf(nums[j]) > -1 &&
                             relItem.indexOf(item) > -1)
