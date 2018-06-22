@@ -1,10 +1,10 @@
-![Async Logo](https://yunxi-material-library.oss-cn-hangzhou.aliyuncs.com/recordImg/786/EsSfKfAaMz.png)
+# [JavaScript code](https://github.com/papa-egg/code/blob/master/code.js)
 
 JavaScript算法题([ES6](http://es6.ruanyifeng.com/))，不定期更新。。。
 
-个人收藏和积累，思维逻辑和编码风格（仅供参考）--- 如有摘抄，请注明出处。
+* 个人收藏和积累，思维逻辑和编码风格（仅供参考）--- 如有摘抄，请注明出处。
 
-我很欢迎别人能在自己拙劣的代码里获得一些收获、get一些技巧和代码思路等等。
+* 我很欢迎别人能在自己拙劣的代码里获得一些收获、get一些技巧和代码思路等等。
 
 *希望你能够喜欢上JS这一门非常有特色的编程语言([ES6](http://es6.ruanyifeng.com/)也给js注入了一种简洁和优雅)，并努力去学习掌握它*
 
