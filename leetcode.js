@@ -61,7 +61,6 @@ function threeSum(nums) {
     const rel = [];
 
     for (let i = 0; i < nums.length; i++) {
-
         for (let j = i + 1; j < nums.length; j++) {
 
             nums.forEach((item, index) => {
@@ -886,4 +885,86 @@ function addOperators(num, target) {
     return rel;
 }
 
+/**
+ * 给定一个填充了0和1的二进制矩阵，找到只包含1的最大矩形并返回其面积
+ * 例：
+ * 输入：
+ * [
+ *   ['1', '0', '1', '0', '0']，
+ *   ['1', '0', '1', '1', '0']，
+ *   ['1', '1', '1', '1', '1']，
+ *   ['1', '0', '0', '1', '0']
+ * ]
+ * 输出： 6
+ *
+ * @param { Array } matrix
+ * @return { Number }
+ */
+function maximalRectangle(matrix) {
+    const sArr = [];
+    const rel = [];
 
+    for (let [ci, cItem] of matrix.entries()) {
+        for (let [mi, mItem] of cItem.entries()) {
+            if (mItem == '1') {
+                sArr.push({
+                    c: ci,
+                    m: mi,
+                })
+            }
+        }
+    }
+
+    for (let item of sArr) {
+        rel.push(getMaxOrdinate(item.c, item.m));
+    }
+
+    function getMaxOrdinate(c, m) {
+        const _oArr = [];
+        let _crs = 1;
+
+        for (let i = 1;;i++) {
+            if (!matrix[c][m + i] || matrix[c][m + i] == '0') {
+                _crs = i;
+
+                break;
+            }
+        }
+
+        for (let j = 1; j <= _crs; j++) {
+            _oArr.push(getRectArea(c, m, j) * j);
+        }
+
+        function getRectArea(c, m, l) {
+            let _l = 1;
+
+            for (let i = 1;;i++) {
+                let pFlag = true;
+
+                if (matrix[c + i]) {
+                    for (let j = 0; j < l; j++) {
+                        if ((matrix[c + i][m + j]) == 0) {
+                            pFlag = false;
+                        }
+                    }
+
+                    if (!pFlag) {
+                        _l = i;
+
+                        break;
+                    }
+                } else {
+                    _l = i;
+
+                    break;
+                }
+            }
+
+            return _l;
+        }
+
+        return Math.max(..._oArr);
+    }
+
+    return rel.length ? Math.max(...rel) : 0;
+}
