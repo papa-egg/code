@@ -969,4 +969,117 @@ function maximalRectangle(matrix) {
     return rel.length ? Math.max(...rel) : 0;
 }
 
+/**
+ * 给定一组候选号码（candidates）（没有重复）和目标号码（target），找出candidates 候选号码总和的所有唯一组合target。
+ * 相同重复数目可以选自candidates 无限次数。
+ * 例1：
+ * 输入： candidates = [2,3,6,7], target = 7，
+ * 结果：
+ * [
+ * [7]，
+ * [2,2,3]
+ * ]
+ *
+ * @param { Array } candidates
+ * @param { Number } target
+ * @return { Array }
+ */
+function combinationSum(candidates, target) {
+    const tArr = [];
+    const sArr = new Set();
+    const rel = [];
+
+    for (let i = 0; i < target; i++) {
+        tArr.push('*');
+    }
+
+    function setSplitItem(k, n) {
+        let _spr = [];
+
+        function splitItem(sr = '', k, n) {
+            const _cArr = sr ? sr.split('|') : [];
+
+            if (_cArr.length == n) {
+                _cArr.sort((a, b) => a - b);
+
+                if (_spr.indexOf(_cArr.join('|')) < 0) {
+                    _spr.push(_cArr.join('|'));
+                }
+
+                return;
+            }
+
+            for (let i = 1; i <= k; i++) {
+                if (_cArr.indexOf(String(i)) < 0) {
+                    let _cr = sr;
+
+                    if (_cArr.length > 0) {
+                        _cr = _cr + '|' + i;
+                    } else {
+                        _cr += i;
+                    }
+
+                    splitItem(_cr, k, n);
+                }
+            }
+        }
+
+        splitItem('', k, n);
+
+        for (let item of _spr) {
+            const cir = item.split('|');
+            const _csr = [];
+            let cs = '';
+
+            for (let [index, cItem] of cir.entries()) {
+                if (index == 0) {
+                    cs += tArr.slice(0, cItem);
+                } else {
+                    cs += '|' + tArr.slice(cir[index - 1], cItem);
+                }
+            }
+
+            cs += '|' + tArr.slice(cir[cir.length - 1]);
+
+            for (let cItem of cs.split('|')) {
+                _csr.push(cItem.split(',').join('').length);
+            }
+
+            _csr.sort((a, b) => a - b);
+
+            sArr.add(_csr.join(','));
+        }
+    }
+
+    for (let i = 2; i <= target; i++) {
+        setSplitItem(target - 1, i - 1);
+    }
+
+    for (let item1 of sArr) {
+        let isConfirm = true;
+
+        for (let item2 of item1.split(',')) {
+            if (candidates.indexOf(parseInt(item2)) < 0) {
+                isConfirm = false;
+            }
+        }
+
+        if (isConfirm) {
+            let fArr = item1.split(',');
+
+            for (let i = 0; i < fArr.length; i++) {
+                fArr[i] = parseInt(fArr[i]);
+            }
+
+            rel.push(fArr);
+        }
+    }
+
+    if (candidates.indexOf(target) > -1) {
+        rel.push([target]);
+    }
+
+    return rel;
+}
+
 
