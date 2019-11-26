@@ -1082,4 +1082,77 @@ function combinationSum(candidates, target) {
     return rel;
 }
 
+/**
+ * 将非负整数转换为其对应的中文繁体表示。可以保证给定输入小于 231 - 1
+ * 例：
+ * 输入：
+ * 100860
+ * 输出： 壹拾万零捌佰陆拾
+ *
+ * @param { Number } num
+ * @return { String }
+ */
+function numberToWords(num) {
+    let numStr = '' + num;
+    const tArr = [
+        { a: 0, c: '零' },
+        { a: 1, c: '壹' },
+        { a: 2, c: '贰' },
+        { a: 3, c: '叁' },
+        { a: 4, c: '肆' },
+        { a: 5, c: '伍' },
+        { a: 6, c: '陆' },
+        { a: 7, c: '柒' },
+        { a: 8, c: '捌' },
+        { a: 9, c: '九' },
+    ];
+    const sArr = ['拾', '佰', '仟', '万', '万拾', '万佰', '万仟', '亿', '亿拾', '亿佰', '亿仟', '亿万'];
 
+    String.prototype.replaceAll = function (s1, s2) {
+        return this.replace(new RegExp(s1, "gm"), s2);
+    };
+
+    for (let item of tArr) {
+        numStr = numStr.replaceAll(item.a, item.c);
+    }
+
+    numStr = numStr.split('').reverse().join('');
+
+    let sl = '';
+    for (let [index, item] of Array.from(numStr).entries()) {
+        if (index === 0) {
+            if (item !== '零') {
+                sl += item;
+            }
+        } else {
+            if (item === '零') {
+                sl += '零';
+            } else {
+                if (sArr[index - 1].length > 1) {
+
+                    if (index <= 7) {
+                        if (sl.indexOf('万') > -1) {
+                            sl = sl + sArr[index - 1][1] + item;
+                        } else {
+                            sl = sl + sArr[index - 1] + item;
+                        }
+                    } else if (index > 7) {
+                        if (sl.indexOf('亿') > -1) {
+                            sl = sl + sArr[index - 1][1] + item;
+                        } else {
+                            sl = sl + sArr[index - 1] + item;
+                        }
+                    }
+
+                } else {
+                    sl = sl + sArr[index - 1] + item;
+                }
+            }
+        }
+    }
+
+  let rel = sl.split('').reverse().join('');
+  rel = rel.replaceAll(/零{1,}/g, '零');
+
+  return rel;
+}
