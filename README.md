@@ -1,6 +1,6 @@
 # [JavaScript code](https://github.com/papa-egg/code/blob/master/code.js)
 
-JavaScript算法题（偏困难）个人逻辑思路和对应编码解答([ES6](http://es6.ruanyifeng.com/))，不定期更新。。。
+JavaScript算法题（偏困难）个人逻辑思路和对应编码解答([ES6](http://es6.ruanyifeng.com/))，问题主要来自于[leetcode](https://leetcode-cn.com),不定期更新。。。
 
 * 个人收藏和积累，思维逻辑和编码风格（仅供参考）--- 如有摘抄，请注明出处。
 
