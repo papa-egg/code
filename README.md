@@ -1163,10 +1163,77 @@ function numberToWords(num) {
         }
     }
 
-  let rel = sl.split('').reverse().join('');
-  rel = rel.replaceAll(/零{1,}/g, '零');
+    let rel = sl.split('').reverse().join('');
+    rel = rel.replaceAll(/零{1,}/g, '零');
 
-  return rel;
+    return rel;
+}
+
+/**
+ * 有 4 张写有 1 到 9 数字的牌。你需要判断是否能通过 *，/，+，-，(，) 的运算得到 24。
+ * 例：
+ * 输入：
+ * [4, 1, 8, 7]
+ * 输出： true
+ *
+ * 输入：
+ * [1, 2, 1, 2]
+ * 输出： false
+ *
+ * @param { Array } nums
+ * @return { Boolean }
+ */
+function judgePoint24 (nums) {
+    const opr = ['+', '-', '*', '/'];
+    const rel = [];
+    Array.prototype.remove = function (item) {
+        const _index = this.indexOf(item);
+        this.splice(_index, 1);
+
+        return this;
+    };
+
+    for (let a1 of nums) {
+        const _cr1 = Object.assign([], nums).remove(a1);
+
+        for (let b1 of opr) {
+            for (let a2 of _cr1) {
+                const _cr2 = Object.assign([], _cr1).remove(a2);
+
+                for (let b2 of opr) {
+                    for (let a3 of _cr2) {
+                        const a4 = Object.assign([], _cr2).remove(a3)[0];
+
+                        for (let b3 of opr) {
+                            rel.push(...bfOpera([a1, a2, a3, a4], [b1, b2, b3]));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for (let item of rel) {
+        if (eval(item) === 24) {
+            return true;
+        }
+    }
+
+    return false;
+
+    function bfOpera (ar, br) {
+        const ipt = [];
+
+        ipt.push(ar[0] + br[0] + ar[1] + br[1] + ar[2] + br[2] + ar[3]);
+        ipt.push('(' + ar[0] + br[0] + ar[1] + ')' + br[1] + ar[2] + br[2] + ar[3]);
+        ipt.push(ar[0] + br[0] + '(' + (ar[1] + br[1] + ar[2]) + ')' + br[2] + ar[3]);
+        ipt.push(ar[0] + br[0] + ar[1] + br[1] + '(' + ar[2] + br[2] + ar[3] + ')');
+        ipt.push('(' + ar[0] + br[0] + ar[1] + br[1] + ar[2] + ')' + br[2] + ar[3]);
+        ipt.push(ar[0] + br[0] + '(' + ar[1] + br[1] + ar[2] + br[2] + ar[3] + ')');
+        ipt.push('(' + ar[0] + br[0] + ar[1] + ')' + br[1] + '(' + ar[2] + br[2] + ar[3] + ')');
+
+        return ipt;
+    }
 }
 
 ```
