@@ -1171,7 +1171,7 @@ function numberToWords(num) {
  * @param { Array } nums
  * @return { Boolean }
  */
-function judgePoint24 (nums) {
+function judgePoint24(nums) {
     const opr = ['+', '-', '*', '/'];
     const rel = [];
     Array.prototype.remove = function (item) {
@@ -1209,7 +1209,7 @@ function judgePoint24 (nums) {
 
     return false;
 
-    function bfOpera (ar, br) {
+    function bfOpera(ar, br) {
         const ipt = [];
 
         ipt.push(ar[0] + br[0] + ar[1] + br[1] + ar[2] + br[2] + ar[3]);
@@ -1238,7 +1238,7 @@ function judgePoint24 (nums) {
  * @param { Number } N
  * @return { Array }
  */
-function consecutiveNumbersSum (N) {
+function consecutiveNumbersSum(N) {
     const rel = [];
     if (N % 2 === 0) {
 
@@ -1265,7 +1265,7 @@ function consecutiveNumbersSum (N) {
 
     return rel;
 
-    function getMatchNumber (n) {
+    function getMatchNumber(n) {
         const nArr = [];
         let mc = false;
 
