@@ -1236,4 +1236,70 @@ function judgePoint24 (nums) {
     }
 }
 
+/**
+ * 给定一个正整数 N，试求有多少组连续正整数满足所有数字之和为 N
+ * 例：
+ * 输入：
+ * 5
+ * 输出： [2,3]
+ *
+ * 输入：
+ * 15
+ * 输出： [7, 8], [4, 5, 6], [1, 2, 3, 4, 5]
+ *
+ * @param { Number } N
+ * @return { Array }
+ */
+function consecutiveNumbersSum (N) {
+    const rel = [];
+    if (N % 2 === 0) {
+
+        return rel;
+    }
+
+    Math.add = function (arr) {
+        let sum = 0;
+
+        for (let item of arr) {
+            sum += item;
+        }
+
+        return sum;
+    };
+
+    for (let i = 2; i <= Math.floor(N / 2); i++) {
+        const matchNumber = getMatchNumber(i);
+
+        if (matchNumber) {
+            rel.push(matchNumber);
+        }
+    }
+
+    return rel;
+
+    function getMatchNumber (n) {
+        const nArr = [];
+        let mc = false;
+
+        for (let i = 1; i <= N; i++) {
+            nArr.push(i);
+        }
+
+        for (let [index, item] of nArr.entries()) {
+            if (index + n > nArr.length - 1) {
+                break;
+            }
+
+            const sArr = nArr.slice(index, index + n);
+
+            if (Math.add(sArr) === N) {
+                mc = sArr.join('+');
+            }
+        }
+
+        return mc;
+    }
+}
+
+
 ```
