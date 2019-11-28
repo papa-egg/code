@@ -1320,7 +1320,7 @@ function largestPalindrome(n) {
     for (let i = maxNum; i >= minNum; i--) {
         for (let j = maxNum; j >= minNum; j--) {
             if (isDigitNumber(i * j)) {
-                return i * j
+                return i * j;
             }
         }
     }
