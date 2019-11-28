@@ -1301,5 +1301,47 @@ function consecutiveNumbersSum(N) {
     }
 }
 
+/**
+ * 找到由两个 n 位数的乘积组成的最大回文数
+ * n 的取值范围为 [1,8]
+ *
+ * 例：
+ * 输入：
+ * 2
+ * 输出： 9009（99 x 91 = 9009）
+ *
+ * @param { Number } n
+ * @return { Number }
+ */
+function largestPalindrome(n) {
+    const minNum = parseInt('1' + '0'.repeat(n - 1));
+    const maxNum = parseInt('9'.repeat(n));
+
+    for (let i = maxNum; i >= minNum; i--) {
+        for (let j = maxNum; j >= minNum; j--) {
+            if (isDigitNumber(i * j)) {
+                return i * j
+            }
+        }
+    }
+
+    function isDigitNumber(num) {
+        const nArr = String(num).split('');
+
+        if (nArr.length % 2 !== 0) {
+            nArr.splice(Math.floor(nArr.length / 2), 1);
+        }
+
+        const nNr = nArr;
+        const nLr = nArr.splice(nNr.length / 2).reverse();
+
+        if (nNr.join('') === nLr.join('')) {
+            return true;
+        }
+
+        return false;
+    }
+}
+
 
 ```

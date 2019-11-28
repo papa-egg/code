@@ -999,7 +999,7 @@ function combinationSum(candidates, target) {
         function splitItem(sr = '', k, n) {
             const _cArr = sr ? sr.split('|') : [];
 
-            if (_cArr.length == n) {
+            if (_cArr.length === n) {
                 _cArr.sort((a, b) => a - b);
 
                 if (_spr.indexOf(_cArr.join('|')) < 0) {
@@ -1032,7 +1032,7 @@ function combinationSum(candidates, target) {
             let cs = '';
 
             for (let [index, cItem] of cir.entries()) {
-                if (index == 0) {
+                if (index === 0) {
                     cs += tArr.slice(0, cItem);
                 } else {
                     cs += '|' + tArr.slice(cir[index - 1], cItem);
@@ -1286,6 +1286,48 @@ function consecutiveNumbersSum(N) {
         }
 
         return mc;
+    }
+}
+
+/**
+ * 找到由两个 n 位数的乘积组成的最大回文数
+ * n 的取值范围为 [1,8]
+ *
+ * 例：
+ * 输入：
+ * 2
+ * 输出： 9009（99 x 91 = 9009）
+ *
+ * @param { Number } n
+ * @return { Number }
+ */
+function largestPalindrome(n) {
+    const minNum = parseInt('1' + '0'.repeat(n - 1));
+    const maxNum = parseInt('9'.repeat(n));
+
+    for (let i = maxNum; i >= minNum; i--) {
+        for (let j = maxNum; j >= minNum; j--) {
+            if (isDigitNumber(i * j)) {
+                return i * j;
+            }
+        }
+    }
+
+    function isDigitNumber(num) {
+        const nArr = String(num).split('');
+
+        if (nArr.length % 2 !== 0) {
+            nArr.splice(Math.floor(nArr.length / 2), 1);
+        }
+
+        const nNr = nArr;
+        const nLr = nArr.splice(nNr.length / 2).reverse();
+
+        if (nNr.join('') === nLr.join('')) {
+            return true;
+        }
+
+        return false;
     }
 }
 
